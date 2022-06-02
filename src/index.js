@@ -95,7 +95,7 @@ app.post("/users/postReview", auth, async (req, res) => {
 
 app.get("/users/getTopAnime", auth, async (req, res) => {
   try {
-    const top = await Anime.find({}).sort({ reviewSum: -1 }).limit(10);
+    const top = await Anime.find({}).sort({ reviewSum: -1 }).limit(12);
     res.send(top);
   } catch (e) {
     res.status(400).send();
