@@ -27,3 +27,41 @@ test("Should Signup New User", async () => {
     })
     expect(user.password).not.toBe("parmparmparm12345#");
 })
+
+test("Should Login Existing User", async () => {
+    const response = await request(app).post("/users/login").send({
+        "email": userOne.email,
+        "password": userOne.password
+    }).expect(200)
+
+    const user = await User.findById(userOneId);
+    expect(user).not.toBeNull();
+
+    expect(user.tokens[1].token).toBe(response.body.token)
+})
+
+test("Should Not Login Non-Existent User", async () => {
+    await request(app).post("/users/login").send({
+        "email": "Lebron@gmail.com",
+        "password": "LALakers12345^#%"
+    }).expect(400)
+})
+
+test("Should Update Name Of Existing User", async () => {
+    await request(app)
+        .patch("/users/profile")
+        .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
+        .send({ "name" : "Pascal Siakam"})
+        .expect(200)
+    
+    const user = await User.findById(userOneId);
+    expect(user.name).toBe("Pascal Siakam");
+})
+
+test("Should Not Update Invalid User Fields", async () => {
+    await request(app)
+        .patch("/users/profile")
+        .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
+        .send({ "Location" : "Vancouver" })
+        .expect(400)
+})
