@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const { VALIDATION_MESSAGES } = require("../../constants/constants");
 
 const auth = async (req, res, next) => {
   try {
@@ -18,7 +19,7 @@ const auth = async (req, res, next) => {
     req.user = user;
     next();
   } catch (e) {
-    res.status(401).send({ error: "Please Authenticate!" });
+    res.status(401).send({ error: VALIDATION_MESSAGES.NEED_AUTH });
   }
 };
 

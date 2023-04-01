@@ -1,14 +1,13 @@
 const express = require("express");
 const cors = require("cors");
-const User = require("./models/user");
 require("./db/mongoose");
-const auth = require("../src/middleware/auth");
+const User = require("./models/user");
 const Anime = require("./models/anime");
+const auth = require("../src/middleware/auth");
 
 const app = express();
 const port = process.env.PORT;
 app.use(cors());
-
 app.use(express.json());
 
 // Personal Notes:
