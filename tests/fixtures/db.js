@@ -49,5 +49,6 @@ module.exports = {
     userOne,
     animeOneId,
     animeOne,
+    defaultAnimeImg,
     setupDatabase
 }

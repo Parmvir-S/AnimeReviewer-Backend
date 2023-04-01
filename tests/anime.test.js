@@ -2,9 +2,7 @@ const request = require("supertest");
 const app = require("../src/app");
 const Anime = require("../src/models/anime");
 const User = require("../src/models/user");
-const { userOneId, userOne, setupDatabase } = require("./fixtures/db");
-const defaultAnimeImg =
-  "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png";
+const { userOneId, userOne, defaultAnimeImg, setupDatabase } = require("./fixtures/db");
 
 beforeEach(setupDatabase);
 
