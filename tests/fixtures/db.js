@@ -17,63 +17,37 @@ const userOne = {
     ]
 }
 
-const userTwoId = new mongoose.Types.ObjectId();
-const userTwo = {
-    _id: userTwoId,
-    name: "Tarsem",
-    email: "Tarsem@example.com",
-    password: "VancouverCanucks123%%",
-    tokens: [
-        {
-            token: jwt.sign({ _id: userTwoId }, process.env.JWT_SECRET)
-        }
-    ]
-}
-
+const animeOneId = new mongoose.Types.ObjectId();
 const animeOne = {
-    _id: new mongoose.Types.ObjectId(),
+    _id: animeOneId,
     title: "title 1",
     image: defaultAnimeImg,
     reviewCount: 1,
     reviewSum: 10,
-    writtenRevies: []
-}
-
-const animeTwo = {
-    _id: new mongoose.Types.ObjectId(),
-    title: "title 2",
-    image: defaultAnimeImg,
-    reviewCount: 2,
-    reviewSum: 20,
-    writtenRevies: []
-}
-
-const animeThree = {
-    _id: new mongoose.Types.ObjectId(),
-    title: "title 3",
-    image: defaultAnimeImg,
-    reviewCount: 3,
-    reviewSum: 30,
-    writtenRevies: []
+    writtenReviews: [
+        {
+            review: "Awesome",
+        },
+        {
+            review: "The Best",            
+        },
+        {
+            review: "Too Good"
+        }
+    ]
 }
 
 const setupDatabase = async () => {
     await User.deleteMany(); //wipes db
     await Anime.deleteMany();
     await new User(userOne).save(); //save user to db
-    await new User(userTwo).save(); 
     await new Anime(animeOne).save(); //save anime to db
-    await new Anime(animeTwo).save();
-    await new Anime(animeThree).save();
 }
 
 module.exports = {
     userOneId,
     userOne,
-    userTwo,
-    userTwoId,
+    animeOneId,
     animeOne,
-    animeTwo,
-    animeThree,
     setupDatabase
 }
